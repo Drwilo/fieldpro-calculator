@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No-Show Cost Calculator — Houston HVAC Operators</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A1628;
+    --navy2: #142236;
+    --teal: #0EA5E9;
+    --teal-dim: #0284C7;
+    --amber: #F59E0B;
+    --red: #EF4444;
+    --green: #22C55E;
+    --ink: #0F172A;
+    --mid: #64748B;
+    --light: #F1F5F9;
+    --border: #E2E8F0;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Header ── */
+  .header {
+    padding: 48px 24px 40px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 9vw, 72px);
+    line-height: .95;
+    letter-spacing: .01em;
+    color: var(--white);
+    margin-bottom: 18px;
+  }
+  .headline span { color: var(--teal); }
+  .subhead {
+    font-size: 16px;
+    font-weight: 300;
+    color: #94A3B8;
+    line-height: 1.6;
+    max-width: 520px;
+  }
+
+  /* ── Card shell ── */
+  .card {
+    background: var(--white);
+    color: var(--ink);
+    border-radius: 20px 20px 0 0;
+    padding: 40px 24px 0;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 20px;
+  }
+
+  /* ── Input rows ── */
+  .inputs { margin-bottom: 36px; }
+  .input-row {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+    align-items: start;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .input-row:last-child { border-bottom: none; }
+
+  .badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .badge.teal { background: var(--teal); color: var(--white); }
+  .badge.amber { background: var(--amber); color: var(--white); }
+
+  .input-content { display: flex; flex-direction: column; gap: 6px; }
+  .input-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .input-hint {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.4;
+  }
+  .input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 6px;
+  }
+  .input-prefix, .input-suffix {
+    padding: 10px 12px;
+    background: var(--light);
+    border: 1.5px solid var(--border);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--mid);
+    white-space: nowrap;
+  }
+  .input-prefix { border-right: none; border-radius: 8px 0 0 8px; }
+  .input-suffix { border-left: none; border-radius: 0 8px 8px 0; }
+  input[type="number"] {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    outline: none;
+    background: var(--white);
+    -moz-appearance: textfield;
+    transition: border-color .15s;
+    min-width: 0;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+  input[type="number"]:focus { border-color: var(--teal); }
+  input.amber-focus:focus { border-color: var(--amber); }
+  input[type="number"].solo {
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+  }
+
+  /* ── Divider ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 0 28px;
+  }
+
+  /* ── Formula rows ── */
+  .formulas { margin-bottom: 28px; }
+  .formula-row {
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 110px 1fr auto;
+    align-items: center;
+    gap: 12px;
+  }
+  @media (max-width: 480px) {
+    .formula-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+  .formula-row.red { background: #FEF2F2; }
+  .formula-row.amber { background: #FFFBEB; }
+  .formula-row.total { background: var(--navy); }
+
+  .formula-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .formula-row.red .formula-tag { color: var(--red); }
+  .formula-row.amber .formula-tag { color: var(--amber); }
+  .formula-row.total .formula-tag { color: var(--teal); }
+
+  .formula-eq {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .formula-row.total .formula-eq { color: #94A3B8; }
+
+  .formula-result {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: .02em;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .formula-row.red .formula-result { color: var(--red); }
+  .formula-row.amber .formula-result { color: var(--amber); }
+  .formula-row.total .formula-result { color: var(--white); font-size: 32px; }
+
+  /* ── Insight banner ── */
+  .insight {
+    background: #EFF6FF;
+    border-left: 4px solid var(--teal);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+  }
+  .insight-head {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1D4ED8;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 5px;
+  }
+  .insight p {
+    font-size: 13px;
+    color: #1E3A5F;
+    line-height: 1.55;
+  }
+
+  /* ── Tier cards ── */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+  @media (max-width: 520px) {
+    .tiers { grid-template-columns: 1fr; }
+  }
+  .tier {
+    border-radius: 10px;
+    padding: 14px;
+    border: 1.5px solid var(--border);
+  }
+  .tier-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .tier-range {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 8px;
+  }
+  .tier-body {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+  .tier.green { background: #F0FDF4; border-color: #BBF7D0; }
+  .tier.green .tier-num { color: var(--green); }
+  .tier.green .tier-range { color: #15803D; }
+  .tier.amber { background: #FFFBEB; border-color: #FDE68A; }
+  .tier.amber .tier-num { color: var(--amber); }
+  .tier.amber .tier-range { color: #B45309; }
+  .tier.red { background: #FEF2F2; border-color: #FECACA; }
+  .tier.red .tier-num { color: var(--red); }
+  .tier.red .tier-range { color: #991B1B; }
+  .tier.green.active-tier { box-shadow: 0 0 0 2.5px #22C55E; }
+  .tier.amber.active-tier { box-shadow: 0 0 0 2.5px #F59E0B; }
+  .tier.red.active-tier   { box-shadow: 0 0 0 2.5px #EF4444; }
+
+  /* ── CTA block ── */
+  .cta {
+    background: var(--navy);
+    padding: 32px 24px 40px;
+    border-radius: 0;
+  }
+  .cta-head {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .cta-sub {
+    font-size: 14px;
+    color: #94A3B8;
+    line-height: 1.6;
+    margin-bottom: 22px;
+    max-width: 480px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background .15s, transform .1s;
+    cursor: pointer;
+    border: none;
+  }
+  .cta-btn:hover { background: var(--teal-dim); transform: translateY(-1px); }
+  .cta-note {
+    font-size: 12px;
+    color: #475569;
+    margin-top: 12px;
+  }
+
+  /* ── Footer strip ── */
+  .foot {
+    background: var(--navy2);
+    padding: 14px 24px;
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .foot p { font-size: 12px; color: #475569; }
+  .foot a { color: var(--teal); text-decoration: none; font-size: 12px; }
+
+  /* ── Pulse animation on total when filled ── */
+  @keyframes pop { 0%{transform:scale(1)} 50%{transform:scale(1.04)} 100%{transform:scale(1)} }
+  .pop { animation: pop .25s ease-out; }
+
+  /* ── Page entrance ── */
+  @keyframes rise { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+  .header { animation: rise .5s ease-out both; }
+  .card { animation: rise .5s .1s ease-out both; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="eyebrow">Houston HVAC Operators — Free Tool</div>
+  <h1 class="headline">What's a bad week<br><span>actually</span> costing you?</h1>
+  <p class="subhead">Type in four numbers. See the real monthly leak in real time. Most operators are surprised — and not in a good way.</p>
+</div>
+
+<div class="card">
+
+  <div class="section-label">Your numbers</div>
+
+  <div class="inputs">
+    <div class="input-row">
+      <div class="badge teal">A</div>
+      <div class="input-content">
+        <div class="input-title">Average revenue per service call</div>
+        <div class="input-hint">Typical HVAC service call or repair ticket. Not installs — just service.</div>
+        <div class="input-wrap">
+          <span class="input-prefix">$</span>
+          <input type="number" id="a" placeholder="350" min="0" oninput="calc()">
+          <span class="input-suffix">per call</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <div class="badge teal">B</div>
+      <div class="input-content">
+        <div class="input-title">No-shows or cancellations per week</div>
+        <div class="input-hint">Count both no-shows and same-day cancellations you couldn't fill. Be honest.</div>
+        <div class="input-wrap">
+          <input type="number" id="b" placeholder="3" min="0" style="flex:1;padding:10px 12px;border:1.5px solid var(--border);border-right:none;border-radius:8px 0 0 8px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:var(--ink);outline:none;background:var(--white);-moz-appearance:textfield;transition:border-color .15s;" oninput="calc()">
+          <span class="input-suffix" style="border-left:none; border-radius:0 8px 8px 0;">jobs / week</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <div class="badge amber">C</div>
+      <div class="input-content">
+        <div class="input-title">Average drive time per wasted trip</div>
+        <div class="input-hint">One-way travel to a job that didn't happen. Houston traffic counts.</div>
+        <div class="input-wrap">
+          <input type="number" id="c" placeholder="25" min="0" class="amber-focus" style="border-radius:8px 0 0 8px; border:1.5px solid var(--border);" oninput="calc()">
+          <span class="input-suffix" style="border-left:1.5px solid var(--border); border-radius:0 8px 8px 0; margin-left:-1px;">minutes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-row" style="border-bottom:none;">
+      <div class="badge amber">D</div>
+      <div class="input-content">
+        <div class="input-title">Technician hourly cost (wage + burden)</div>
+        <div class="input-hint">Wage + payroll taxes + truck + fuel. $35–55/hr is typical for Houston.</div>
+        <div class="input-wrap">
+          <span class="input-prefix">$</span>
+          <input type="number" id="d" placeholder="45" min="0" class="amber-focus" oninput="calc()">
+          <span class="input-suffix">/ hour</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-label">Now do the math</div>
+
+  <div class="formulas">
+    <div class="formula-row red">
+      <span class="formula-tag">Revenue lost</span>
+      <span class="formula-eq">A &times; B &times; 4 weeks</span>
+      <span class="formula-result" id="rev">—</span>
+    </div>
+    <div class="formula-row amber">
+      <span class="formula-tag">Drive time lost</span>
+      <span class="formula-eq">(C&divide;60) &times; D &times; B &times; 4</span>
+      <span class="formula-result" id="drive">—</span>
+    </div>
+    <div class="formula-row total">
+      <span class="formula-tag">Total leak</span>
+      <span class="formula-eq">Revenue + drive time</span>
+      <span class="formula-result" id="total">—</span>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-head">What the average Houston operator finds</div>
+    <p>3 no-shows/week on a $350 ticket = <strong>$4,200/month</strong> in revenue alone — before you count the drive time, the idle tech, or the customer who never rebooks. The real number is usually higher.</p>
+  </div>
+
+  <div class="section-label">What your number means</div>
+
+  <div class="tiers">
+    <div class="tier green" id="t1">
+      <div class="tier-num">1</div>
+      <div class="tier-range">Under $500/mo</div>
+      <div class="tier-body">Running tight. A basic reminder system still recovers 2–3x its cost.</div>
+    </div>
+    <div class="tier amber" id="t2">
+      <div class="tier-num">2</div>
+      <div class="tier-range">$500–$2,000/mo</div>
+      <div class="tier-body">Most common range. Reminders + dispatch typically cuts this in half.</div>
+    </div>
+    <div class="tier red" id="t3">
+      <div class="tier-num">3</div>
+      <div class="tier-range">Over $2,000/mo</div>
+      <div class="tier-body">Urgent and solvable. This number should not still exist in 30 days.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="cta">
+  <div class="cta-head">Want someone to fix this for your operation?</div>
+  <p class="cta-sub">Two-week free trial. No call needed. No credit card. Fill in three answers and reminders will be running within 24 hours. If your no-shows don't drop, you owe nothing.</p>
+  <a class="cta-btn" href="https://fieldpro.typeform.com/start" target="_blank">Start your free two weeks &rarr;</a>
+  <p class="cta-note">Free to use. Share with any operator who needs it. &nbsp;|&nbsp; <em style="color:#334155">Update the link above once your Typeform is live.</em></p>
+</div>
+
+<div class="foot">
+  <p>Built for Houston HVAC operators. Works for any trade.</p>
+  <a href="https://fieldpro.typeform.com/start">fieldpro.typeform.com/start</a>
+</div>
+
+<script>
+function fmt(n) {
+  if (!isFinite(n) || n <= 0) return '—';
+  return '$' + Math.round(n).toLocaleString();
+}
+
+function highlight(total) {
+  document.getElementById('t1').classList.remove('active-tier');
+  document.getElementById('t2').classList.remove('active-tier');
+  document.getElementById('t3').classList.remove('active-tier');
+  if (!total || total <= 0) return;
+  if (total < 500) document.getElementById('t1').classList.add('active-tier');
+  else if (total <= 2000) document.getElementById('t2').classList.add('active-tier');
+  else document.getElementById('t3').classList.add('active-tier');
+}
+
+function calc() {
+  const a = parseFloat(document.getElementById('a').value) || 0;
+  const b = parseFloat(document.getElementById('b').value) || 0;
+  const c = parseFloat(document.getElementById('c').value) || 0;
+  const d = parseFloat(document.getElementById('d').value) || 0;
+
+  const rev   = a * b * 4;
+  const drive = (c / 60) * d * b * 4;
+  const total = rev + drive;
+
+  document.getElementById('rev').textContent   = a && b ? fmt(rev)   : '—';
+  document.getElementById('drive').textContent = c && d && b ? fmt(drive) : '—';
+
+  const totalEl = document.getElementById('total');
+  const prev = totalEl.textContent;
+  const next = (a || b || c || d) && total > 0 ? fmt(total) : '—';
+  totalEl.textContent = next;
+  if (prev !== next && next !== '—') {
+    totalEl.classList.remove('pop');
+    void totalEl.offsetWidth;
+    totalEl.classList.add('pop');
+  }
+
+  highlight(total);
+}
+</script>
+</body>
+</html>
