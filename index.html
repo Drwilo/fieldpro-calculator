@@ -324,16 +324,45 @@
   }
   .cta-btn:hover { background: var(--teal-dim); transform: translateY(-1px); }
   .cta-note {
-    font-size: 12px;
-    color: #475569;
+    font-size: 14px;
+    color: #94A3B8;
     margin-top: 12px;
+    line-height: 1.5;
   }
+  .cta-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    max-width: 860px;
+  }
+  @media (max-width: 600px) {
+    .cta-two-col { grid-template-columns: 1fr; gap: 32px; }
+    .cta-right { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,.1); padding-top: 28px; }
+  }
+  .cta-left {}
+  .cta-right {
+    border-left: 1px solid rgba(255,255,255,.1);
+    padding-left: 40px;
+  }
+  .cta-right-sub {
+    font-size: 15px;
+    color: #94A3B8;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .cta-btn-outline {
+    background: var(--teal) !important;
+    color: var(--white) !important;
+    border: none !important;
+  }
+  .cta-btn-outline:hover { background: var(--teal-dim) !important; }
 
   /* ── Footer strip ── */
   .foot {
     background: var(--navy2);
-    padding: 14px 24px;
-    max-width: 680px;
+    padding: 18px 24px;
+    max-width: 860px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -341,8 +370,8 @@
     flex-wrap: wrap;
     gap: 8px;
   }
-  .foot p { font-size: 12px; color: #475569; }
-  .foot a { color: var(--teal); text-decoration: none; font-size: 12px; }
+  .foot p { font-size: 14px; color: #64748B; }
+  .foot a { color: var(--teal); text-decoration: none; font-size: 14px; font-weight: 500; }
 
   /* ── Pulse animation on total when filled ── */
   @keyframes pop { 0%{transform:scale(1)} 50%{transform:scale(1.04)} 100%{transform:scale(1)} }
@@ -357,7 +386,7 @@
 <body>
 
 <div class="header">
-  <div class="eyebrow">Houston HVAC Operators — Free Tool</div>
+  <div class="eyebrow">Trade Operators · Specialists · Contractors — Free Tool</div>
   <h1 class="headline">What's a bad week<br><span>actually</span> costing you?</h1>
   <p class="subhead">Type in four numbers. See the real monthly leak in real time. Most operators are surprised — and not in a good way.</p>
 </div>
@@ -468,20 +497,25 @@
 </div>
 
 <div class="cta">
-  <div class="cta-head">Want someone to fix this for your operation?</div>
-  <p class="cta-sub">Two-week free trial. No call needed. No credit card. Fill in three answers and reminders will be running within 24 hours. If your no-shows don't drop, you owe nothing.</p>
-  <a class="cta-btn" href="https://fieldpro.typeform.com/start" target="_blank">Start your free two weeks &rarr;</a>
-  <p class="cta-note">Free to use. Share with any operator who needs it. &nbsp;|&nbsp; <em style="color:#334155">Update the link above once your Typeform is live.</em></p>
-
-  <div style="margin-top:28px;padding-top:28px;border-top:1px solid rgba(255,255,255,.1);text-align:center;">
-    <p style="font-size:13px;color:#64748B;margin-bottom:14px;line-height:1.6;">Not ready to start a trial? Get your free digital business card with a built-in booking link — share it with your next customer today.</p>
-    <a style="display:inline-block;background:transparent;color:#0EA5E9;font-family:DM Sans,sans-serif;font-weight:600;font-size:14px;padding:12px 24px;border-radius:8px;text-decoration:none;border:1.5px solid #0EA5E9;" href="bizcard.html" target="_blank">Get your free business card &rarr;</a>
+  <div class="cta-two-col">
+    <!-- Left: main offer -->
+    <div class="cta-left">
+      <div class="cta-head">Want someone to fix this for your operation?</div>
+      <p class="cta-sub">Two-week free trial. No call needed. No credit card. Fill in three answers and reminders will be running within 24 hours. If your no-shows don't drop, you owe nothing.</p>
+      <a class="cta-btn" href="https://fieldpro.typeform.com/start" target="_blank">Start your free two weeks &rarr;</a>
+      <p class="cta-note">Free to use. Share with any operator who needs it.</p>
+    </div>
+    <!-- Right: business card offer -->
+    <div class="cta-right">
+      <p class="cta-right-sub">Not ready for a trial? Get your free digital business card with a built-in booking link — share it with your next customer today.</p>
+      <a class="cta-btn cta-btn-outline" href="bizcard.html" target="_blank">Get your free business card &rarr;</a>
+    </div>
   </div>
 </div>
 
 <div class="foot">
-  <p>Built for Houston HVAC operators. Works for any trade.</p>
-  <a href="https://fieldpro.typeform.com/start">fieldpro.typeform.com/start</a>
+  <p>Built for operators, specialists &amp; contractors. Works for any trade.</p>
+  <a href="https://fieldpro.typeform.com/start">Start your free trial</a>
 </div>
 
 <script>
