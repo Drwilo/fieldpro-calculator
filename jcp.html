@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Job — FieldPro</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #0A1628;
+  --navy2: #142236;
+  --teal: #0EA5E9;
+  --teal-dim: #0284C7;
+  --teal-light: #E0F2FE;
+  --green: #16A34A;
+  --green-light: #DCFCE7;
+  --amber: #D97706;
+  --ink: #0F172A;
+  --mid: #64748B;
+  --light: #F1F5F9;
+  --border: #E2E8F0;
+  --white: #FFFFFF;
+  --red: #DC2626;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--light);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ── Header strip ── */
+.header {
+  background: var(--navy);
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--teal);
+  letter-spacing: .06em;
+}
+.header-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94A3B8;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* ── Operator card ── */
+.op-card {
+  background: var(--navy);
+  padding: 32px 24px 28px;
+  text-align: center;
+}
+.op-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--white);
+  margin: 0 auto 14px;
+  border: 3px solid rgba(14,165,233,.3);
+}
+.op-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px;
+  color: var(--white);
+  letter-spacing: .04em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.op-trade {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 4px;
+}
+.op-area {
+  font-size: 13px;
+  color: #64748B;
+}
+.op-trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  background: rgba(22,163,74,.15);
+  border: 1px solid rgba(22,163,74,.3);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #4ADE80;
+}
+.trust-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ADE80;
+}
+
+/* ── Main form card ── */
+.form-wrap {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.form-intro {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.form-intro h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--navy);
+  letter-spacing: .03em;
+  margin-bottom: 6px;
+}
+.form-intro p {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+}
+.card-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.field { margin-bottom: 16px; }
+.field:last-child { margin-bottom: 0; }
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.field label .req {
+  color: var(--teal);
+  margin-left: 2px;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--white);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  -webkit-appearance: none;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(14,165,233,.12);
+}
+.field textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 38px;
+  cursor: pointer;
+}
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 420px) {
+  .field-row { grid-template-columns: 1fr; }
+}
+
+.input-prefix-wrap {
+  display: flex;
+}
+.prefix {
+  padding: 11px 12px;
+  background: var(--light);
+  border: 1.5px solid var(--border);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  font-size: 14px;
+  color: var(--mid);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.input-prefix-wrap input {
+  border-radius: 0 8px 8px 0;
+}
+
+/* ── Time preference pills ── */
+.time-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.pill {
+  padding: 8px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--mid);
+  cursor: pointer;
+  background: var(--white);
+  transition: all .15s;
+  user-select: none;
+}
+.pill:hover { border-color: var(--teal); color: var(--teal); }
+.pill.selected {
+  background: var(--teal-light);
+  border-color: var(--teal);
+  color: var(--teal-dim);
+}
+
+/* ── Submit button ── */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--teal);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+  margin-top: 8px;
+  letter-spacing: .01em;
+}
+.submit-btn:hover { background: var(--teal-dim); }
+.submit-btn:active { transform: scale(.99); }
+.submit-btn:disabled {
+  background: var(--border);
+  color: var(--mid);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--mid);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+/* ── Success screen ── */
+.success {
+  display: none;
+  text-align: center;
+  padding: 48px 24px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.success-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--green-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.success h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 34px;
+  color: var(--navy);
+  margin-bottom: 10px;
+  letter-spacing: .03em;
+}
+.success p {
+  font-size: 15px;
+  color: var(--mid);
+  line-height: 1.65;
+  margin-bottom: 28px;
+}
+.confirm-card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 20px;
+  text-align: left;
+  margin-bottom: 24px;
+}
+.confirm-row {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.confirm-row:last-child { border-bottom: none; }
+.confirm-label { color: var(--mid); min-width: 100px; }
+.confirm-value { color: var(--ink); font-weight: 500; flex: 1; }
+.add-cal-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: background .15s;
+}
+.add-cal-btn:hover { background: var(--navy2); }
+
+/* ── Error state ── */
+.field-error {
+  font-size: 12px;
+  color: var(--red);
+  margin-top: 4px;
+}
+.field input.error,
+.field select.error { border-color: var(--red); }
+
+/* ── Animations ── */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+.header  { animation: rise .3s ease-out both; }
+.op-card { animation: rise .35s .05s ease-out both; }
+.form-wrap { animation: rise .4s .1s ease-out both; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">FieldPro</div>
+  <div class="header-badge">Job booking portal</div>
+</div>
+
+<!-- Operator Identity Card -->
+<div class="op-card" id="op-card">
+  <div class="op-avatar" id="op-initials">MH</div>
+  <div class="op-name" id="op-name">Marcus Hernandez</div>
+  <div class="op-trade" id="op-trade">HVAC Technician</div>
+  <div class="op-area" id="op-area">Katy · Tomball · Spring · Houston Metro</div>
+  <div class="op-trust">
+    <div class="trust-dot"></div>
+    Verified FieldPro operator
+  </div>
+</div>
+
+<!-- Form -->
+<div class="form-wrap" id="form-section">
+
+  <div class="form-intro">
+    <h2>Book your service</h2>
+    <p>Fill in your details below. <span id="op-first">Marcus</span> will confirm within a few hours and you'll get a reminder before your appointment.</p>
+  </div>
+
+  <form id="jcp-form" novalidate>
+
+    <!-- Customer info -->
+    <div class="card">
+      <div class="card-title">Your information</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>First name <span class="req">*</span></label>
+          <input type="text" id="cust-first" placeholder="Maria" autocomplete="given-name">
+          <div class="field-error" id="err-first"></div>
+        </div>
+        <div class="field">
+          <label>Last name <span class="req">*</span></label>
+          <input type="text" id="cust-last" placeholder="Rodriguez" autocomplete="family-name">
+          <div class="field-error" id="err-last"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Phone number <span class="req">*</span></label>
+        <div class="input-prefix-wrap">
+          <span class="prefix">+1</span>
+          <input type="tel" id="cust-phone" placeholder="(832) 555-0192" autocomplete="tel">
+        </div>
+        <div class="field-error" id="err-phone"></div>
+      </div>
+
+      <div class="field">
+        <label>Service address <span class="req">*</span></label>
+        <input type="text" id="cust-address" placeholder="4521 Oak Lane, Katy TX 77450" autocomplete="street-address">
+        <div class="field-error" id="err-address"></div>
+      </div>
+    </div>
+
+    <!-- Job details -->
+    <div class="card">
+      <div class="card-title">Job details</div>
+
+      <div class="field">
+        <label>What do you need? <span class="req">*</span></label>
+        <select id="job-type">
+          <option value="">Select job type</option>
+          <option>AC service / repair</option>
+          <option>AC installation</option>
+          <option>Heat pump service</option>
+          <option>Seasonal tune-up</option>
+          <option>Emergency call</option>
+          <option>Duct inspection / repair</option>
+          <option>Thermostat installation</option>
+          <option>Other — I'll describe below</option>
+        </select>
+        <div class="field-error" id="err-job"></div>
+      </div>
+
+      <div class="field">
+        <label>Preferred date <span class="req">*</span></label>
+        <input type="date" id="job-date">
+        <div class="field-error" id="err-date"></div>
+      </div>
+
+      <div class="field">
+        <label>Preferred time</label>
+        <div class="time-pills" id="time-pills">
+          <div class="pill" data-val="Morning (8am–12pm)">Morning</div>
+          <div class="pill" data-val="Afternoon (12pm–5pm)">Afternoon</div>
+          <div class="pill" data-val="Any time">Any time</div>
+          <div class="pill" data-val="ASAP — emergency">ASAP</div>
+        </div>
+        <input type="hidden" id="job-time" value="">
+      </div>
+
+      <div class="field">
+        <label>Notes for <span id="op-first-2">Marcus</span></label>
+        <textarea id="job-notes" placeholder="Anything helpful — system age, what you've noticed, gate code, etc."></textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submit-btn">
+      Request this appointment →
+    </button>
+    <p class="form-note">
+      No payment required. <span id="op-first-3">Marcus</span> will confirm your time and send a reminder before your appointment.
+    </p>
+
+  </form>
+</div>
+
+<!-- Success screen -->
+<div class="success" id="success-screen">
+  <div class="success-icon">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <path d="M6 16l7 7 13-13" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <h2>You're booked in</h2>
+  <p id="success-msg">Your request has been sent. You'll get a text confirmation within a few hours and a reminder before your appointment.</p>
+
+  <div class="confirm-card" id="confirm-card"></div>
+
+  <button class="add-cal-btn" id="cal-btn" onclick="addToCalendar()">Add to calendar</button>
+</div>
+
+<!-- Footer -->
+<div style="text-align:center;padding:24px;font-size:12px;color:#94A3B8;">
+  Powered by <strong style="color:#0EA5E9;">FieldPro</strong> · Scheduling made simple for trade operators
+</div>
+
+<script>
+// ── URL param reader ────────────────────────────────────────────────────────
+const params = new URLSearchParams(window.location.search);
+
+function getParam(key, fallback) {
+  return params.get(key) || fallback;
+}
+
+// ── Populate operator identity ──────────────────────────────────────────────
+const opName  = getParam('name',  'Marcus Hernandez');
+const opTrade = getParam('trade', 'HVAC Technician');
+const opArea  = getParam('area',  'Katy · Tomball · Spring · Houston Metro');
+const opFirst = opName.split(' ')[0];
+const opInit  = opName.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+
+document.getElementById('op-name').textContent    = opName;
+document.getElementById('op-trade').textContent   = opTrade;
+document.getElementById('op-area').textContent    = opArea;
+document.getElementById('op-initials').textContent = opInit;
+document.getElementById('op-first').textContent   = opFirst;
+document.getElementById('op-first-2').textContent = opFirst;
+document.getElementById('op-first-3').textContent = opFirst;
+document.title = `Book with ${opFirst} — FieldPro`;
+
+// ── Set min date to tomorrow ────────────────────────────────────────────────
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+document.getElementById('job-date').min = tomorrow.toISOString().split('T')[0];
+
+// ── Time pills ──────────────────────────────────────────────────────────────
+document.querySelectorAll('.pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
+    pill.classList.add('selected');
+    document.getElementById('job-time').value = pill.dataset.val;
+  });
+});
+
+// ── Validation ──────────────────────────────────────────────────────────────
+function validate() {
+  let ok = true;
+  const fields = [
+    { id: 'cust-first',   err: 'err-first',   msg: 'First name is required' },
+    { id: 'cust-last',    err: 'err-last',     msg: 'Last name is required' },
+    { id: 'cust-phone',   err: 'err-phone',    msg: 'Phone number is required' },
+    { id: 'cust-address', err: 'err-address',  msg: 'Service address is required' },
+    { id: 'job-type',     err: 'err-job',      msg: 'Please select a job type' },
+    { id: 'job-date',     err: 'err-date',     msg: 'Please select a preferred date' },
+  ];
+  fields.forEach(f => {
+    const el = document.getElementById(f.id);
+    const errEl = document.getElementById(f.err);
+    if (!el.value.trim()) {
+      el.classList.add('error');
+      errEl.textContent = f.msg;
+      ok = false;
+    } else {
+      el.classList.remove('error');
+      errEl.textContent = '';
+    }
+  });
+  return ok;
+}
+
+// ── Clear error on input ────────────────────────────────────────────────────
+['cust-first','cust-last','cust-phone','cust-address','job-type','job-date'].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener('input', () => {
+    el.classList.remove('error');
+    const errId = 'err-' + id.replace('cust-','').replace('job-','');
+    const errEl = document.getElementById(errId);
+    if (errEl) errEl.textContent = '';
+  });
+});
+
+// ── Store submission for calendar ───────────────────────────────────────────
+let submissionData = {};
+
+// ── Form submit ─────────────────────────────────────────────────────────────
+document.getElementById('jcp-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (!validate()) return;
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  submissionData = {
+    firstName:  document.getElementById('cust-first').value.trim(),
+    lastName:   document.getElementById('cust-last').value.trim(),
+    phone:      document.getElementById('cust-phone').value.trim(),
+    address:    document.getElementById('cust-address').value.trim(),
+    jobType:    document.getElementById('job-type').value,
+    date:       document.getElementById('job-date').value,
+    time:       document.getElementById('job-time').value || 'Flexible',
+    notes:      document.getElementById('job-notes').value.trim(),
+    operator:   opName,
+    operatorFirst: opFirst,
+  };
+
+  // ── Send to Google Apps Script webhook ──────────────────────────────────
+  // Replace PASTE_YOUR_WEBHOOK_URL_HERE with the URL you get after deploying
+  // the Apps Script (see fieldpro_apps_script.js for setup instructions)
+  const WEBHOOK_URL = 'PASTE_YOUR_WEBHOOK_URL_HERE';
+
+  if (WEBHOOK_URL === 'PASTE_YOUR_WEBHOOK_URL_HERE') {
+    // Dev mode — no webhook yet, just show success
+    setTimeout(showSuccess, 600);
+    return;
+  }
+
+  fetch(WEBHOOK_URL, {
+    method: 'POST',
+    mode: 'no-cors', // Apps Script requires no-cors
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(submissionData)
+  })
+  .then(() => showSuccess())
+  .catch(() => showSuccess()); // show success regardless — data may still arrive
+});
+
+// ── Show success ─────────────────────────────────────────────────────────────
+function showSuccess() {
+  document.getElementById('form-section').style.display = 'none';
+  const s = document.getElementById('success-screen');
+  s.style.display = 'block';
+
+  const d = submissionData;
+  const dateFormatted = d.date
+    ? new Date(d.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
+    : 'TBD';
+
+  document.getElementById('success-msg').textContent =
+    `Your request has been sent to ${d.operatorFirst}. You'll get a text confirmation shortly and a reminder before your appointment.`;
+
+  const card = document.getElementById('confirm-card');
+  card.innerHTML = `
+    <div class="confirm-row"><div class="confirm-label">Name</div><div class="confirm-value">${d.firstName} ${d.lastName}</div></div>
+    <div class="confirm-row"><div class="confirm-label">Phone</div><div class="confirm-value">${d.phone}</div></div>
+    <div class="confirm-row"><div class="confirm-label">Address</div><div class="confirm-value">${d.address}</div></div>
+    <div class="confirm-row"><div class="confirm-label">Service</div><div class="confirm-value">${d.jobType}</div></div>
+    <div class="confirm-row"><div class="confirm-label">Date</div><div class="confirm-value">${dateFormatted}</div></div>
+    <div class="confirm-row"><div class="confirm-label">Time</div><div class="confirm-value">${d.time}</div></div>
+    <div class="confirm-row"><div class="confirm-label">Technician</div><div class="confirm-value">${d.operator}</div></div>
+  `;
+}
+
+// ── Add to calendar (Google) ─────────────────────────────────────────────────
+function addToCalendar() {
+  const d = submissionData;
+  if (!d.date) return;
+  const dt = d.date.replace(/-/g, '');
+  const title = encodeURIComponent(`${d.jobType} — ${d.operatorFirst}`);
+  const details = encodeURIComponent(`Service by ${d.operator} via FieldPro`);
+  const loc = encodeURIComponent(d.address);
+  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dt}/${dt}&details=${details}&location=${loc}`;
+  window.open(url, '_blank');
+}
+</script>
+</body>
+</html>
