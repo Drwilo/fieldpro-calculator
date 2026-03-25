@@ -8,376 +8,210 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --navy: #0A1628;
-  --navy2: #142236;
-  --teal: #0EA5E9;
-  --teal-dim: #0284C7;
-  --teal-light: #E0F2FE;
-  --green: #16A34A;
-  --green-light: #DCFCE7;
-  --amber: #D97706;
-  --ink: #0F172A;
-  --mid: #64748B;
-  --light: #F1F5F9;
-  --border: #E2E8F0;
-  --white: #FFFFFF;
-  --red: #DC2626;
+  --navy:#0A1628; --navy2:#142236; --teal:#0EA5E9; --teal-dim:#0284C7;
+  --teal-light:#E0F2FE; --green:#16A34A; --green-light:#DCFCE7;
+  --amber:#D97706; --ink:#0F172A; --mid:#64748B;
+  --light:#F1F5F9; --border:#E2E8F0; --white:#FFFFFF; --red:#DC2626;
 }
+body { font-family:'DM Sans',sans-serif; background:var(--light); color:var(--ink); min-height:100vh; }
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--light);
-  color: var(--ink);
-  min-height: 100vh;
-}
-
-.header {
-  background: var(--navy);
-  padding: 0 24px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.brand {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  color: var(--teal);
-  letter-spacing: .06em;
-}
-.header-tag {
-  font-size: 11px;
-  font-weight: 600;
-  color: #94A3B8;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
+/* ── Header ── */
+.header { background:var(--navy); padding:0 24px; height:56px; display:flex; align-items:center; justify-content:space-between; }
+.brand { font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--teal); letter-spacing:.06em; }
+.header-tag { font-size:11px; font-weight:600; color:#94A3B8; letter-spacing:.1em; text-transform:uppercase; }
 
 /* ── Hero ── */
-.hero {
-  background: var(--navy);
-  padding: 36px 24px 32px;
-  text-align: center;
-}
-.hero-eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .16em;
-  color: var(--teal);
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.hero h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(34px, 7vw, 54px);
-  color: var(--white);
-  line-height: .95;
-  margin-bottom: 14px;
-}
-.hero h1 span { color: var(--teal); }
-.hero p {
-  font-size: 15px;
-  font-weight: 300;
-  color: #94A3B8;
-  max-width: 440px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
+.hero { background:var(--navy); padding:36px 24px 32px; text-align:center; }
+.hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:.16em; color:var(--teal); text-transform:uppercase; margin-bottom:12px; }
+.hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(34px,7vw,54px); color:var(--white); line-height:.95; margin-bottom:14px; }
+.hero h1 span { color:var(--teal); }
+.hero p { font-size:15px; font-weight:300; color:#94A3B8; max-width:440px; margin:0 auto; line-height:1.6; }
 
-/* ── Two-column layout ── */
-.main {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 28px 16px 48px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  align-items: start;
-}
-@media (max-width: 640px) {
-  .main { grid-template-columns: 1fr; }
-}
+/* ── Layout ── */
+.main { max-width:940px; margin:0 auto; padding:28px 16px 48px; display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+@media(max-width:660px){ .main{ grid-template-columns:1fr; } }
 
 /* ── Form panel ── */
-.panel {
-  background: var(--white);
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  padding: 24px;
-}
-.panel-title {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--mid);
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.panel-title::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-.field { margin-bottom: 14px; }
-.field:last-child { margin-bottom: 0; }
-.field label {
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ink);
-  margin-bottom: 5px;
-}
+.panel { background:var(--white); border-radius:16px; border:1px solid var(--border); padding:24px; }
+.panel-title { font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--mid); margin-bottom:20px; display:flex; align-items:center; gap:8px; }
+.panel-title::after { content:''; flex:1; height:1px; background:var(--border); }
+.field { margin-bottom:14px; }
+.field label { display:block; font-size:13px; font-weight:500; color:var(--ink); margin-bottom:5px; }
+.field label span.note { font-weight:400; color:var(--mid); font-size:11px; margin-left:4px; }
 .field input, .field select {
-  width: 100%;
-  padding: 10px 13px;
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  color: var(--ink);
-  background: var(--white);
-  outline: none;
-  transition: border-color .15s, box-shadow .15s;
-  -webkit-appearance: none;
+  width:100%; padding:10px 13px; border:1.5px solid var(--border); border-radius:8px;
+  font-family:'DM Sans',sans-serif; font-size:15px; color:var(--ink); background:var(--white);
+  outline:none; transition:border-color .15s, box-shadow .15s; -webkit-appearance:none;
 }
-.field input:focus, .field select:focus {
-  border-color: var(--teal);
-  box-shadow: 0 0 0 3px rgba(14,165,233,.1);
-}
+.field input:focus, .field select:focus { border-color:var(--teal); box-shadow:0 0 0 3px rgba(14,165,233,.1); }
 .field select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 13px center;
-  padding-right: 36px;
-  cursor: pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 13px center; padding-right:36px; cursor:pointer;
 }
 
-/* Color picker */
-.color-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 6px;
+/* ── DBA field highlight ── */
+.field.dba-field input {
+  font-size:17px; font-weight:600; letter-spacing:.02em;
+  border-color:var(--teal); box-shadow:0 0 0 3px rgba(14,165,233,.1);
 }
-.color-swatch {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: transform .15s, border-color .15s;
-}
-.color-swatch:hover { transform: scale(1.15); }
-.color-swatch.active { border-color: var(--ink); transform: scale(1.1); }
+.dba-hint { font-size:11px; color:var(--mid); margin-top:4px; }
 
-.gen-btn {
-  width: 100%;
-  padding: 13px;
-  background: var(--teal);
-  color: var(--white);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background .15s;
-  margin-top: 16px;
+/* ── Logo upload ── */
+.logo-upload {
+  border:2px dashed var(--border); border-radius:10px; padding:16px; text-align:center;
+  cursor:pointer; transition:all .2s; position:relative; background:var(--light);
 }
-.gen-btn:hover { background: var(--teal-dim); }
+.logo-upload:hover { border-color:var(--teal); background:var(--teal-light); }
+.logo-upload.drag-over { border-color:var(--teal); background:var(--teal-light); }
+.logo-upload input[type="file"] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+.upload-icon { font-size:24px; margin-bottom:4px; }
+.upload-text { font-size:12px; font-weight:500; color:var(--mid); }
+.upload-sub { font-size:10px; color:#94A3B8; margin-top:2px; }
+.logo-preview { width:56px; height:56px; border-radius:8px; object-fit:contain; margin:0 auto 6px; display:none; border:1px solid var(--border); background:var(--white); padding:3px; }
+.logo-clear { font-size:11px; color:var(--red); cursor:pointer; font-weight:500; background:none; border:none; font-family:'DM Sans',sans-serif; display:none; margin-top:4px; }
 
-/* ── Card preview panel ── */
-.preview-panel {
-  position: sticky;
-  top: 24px;
+/* ── Icon grid ── */
+.trade-icons { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; margin-top:6px; }
+.trade-icon-btn {
+  display:flex; flex-direction:column; align-items:center; gap:3px;
+  padding:7px 4px; border-radius:8px; border:1.5px solid var(--border);
+  cursor:pointer; background:var(--white); transition:all .15s;
+  font-size:10px; font-weight:500; color:var(--mid); text-align:center; line-height:1.3;
 }
-.preview-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--mid);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.preview-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
+.trade-icon-btn:hover { border-color:var(--teal); color:var(--teal); }
+.trade-icon-btn.selected { background:var(--teal-light); border-color:var(--teal); color:var(--teal-dim); }
+.trade-icon-btn .ti { font-size:20px; line-height:1; }
 
-/* ── The actual business card ── */
+/* ── Colors ── */
+.color-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; }
+.color-swatch { width:30px; height:30px; border-radius:50%; cursor:pointer; border:2px solid transparent; transition:transform .15s,border-color .15s; }
+.color-swatch:hover { transform:scale(1.15); }
+.color-swatch.active { border-color:var(--ink); transform:scale(1.1); }
+
+.gen-btn { width:100%; padding:13px; background:var(--teal); color:var(--white); font-family:'DM Sans',sans-serif; font-size:15px; font-weight:600; border:none; border-radius:8px; cursor:pointer; transition:background .15s; margin-top:16px; }
+.gen-btn:hover { background:var(--teal-dim); }
+
+/* ══════════════════════════════════════════════════
+   BUSINESS CARD — full-bleed layout, no void
+══════════════════════════════════════════════════ */
+.preview-panel { position:sticky; top:24px; }
+.preview-label { font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--mid); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+.preview-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
 .biz-card {
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(10,22,40,.18);
-  aspect-ratio: 1.75;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 22px 24px 18px;
-  position: relative;
-  background: var(--navy);
-  transition: background .3s;
-  margin-bottom: 20px;
+  border-radius:18px; overflow:hidden;
+  box-shadow:0 12px 48px rgba(10,22,40,.28);
+  aspect-ratio:1.78;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  position:relative;
+  background:var(--navy);
+  transition:background .3s;
+  margin-bottom:8px;
 }
-.card-accent {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 120px;
-  height: 120px;
-  border-radius: 0 16px 0 100%;
-  opacity: .12;
-  background: var(--white);
-  transition: background .3s;
+
+/* Geometric background layer */
+.card-bg { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.card-bg svg { position:absolute; top:0; right:0; }
+
+/* ── ROW 1: Identity ── */
+.card-top {
+  display:flex; align-items:center; gap:12px;
+  padding:16px 18px 10px;
+  position:relative; z-index:1;
+  border-bottom:1px solid rgba(255,255,255,.07);
 }
-.card-top { position: relative; z-index: 1; }
+.card-logo-wrap {
+  width:40px; height:40px; border-radius:8px;
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.15);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; overflow:hidden;
+}
+.card-logo-wrap img { width:100%; height:100%; object-fit:contain; padding:3px; }
+.card-logo-icon { font-size:20px; line-height:1; }
+.card-id { flex:1; }
 .card-op-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(22px, 4vw, 30px);
-  color: var(--white);
-  letter-spacing: .04em;
-  line-height: 1;
-  margin-bottom: 4px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(18px,3.2vw,26px);
+  color:var(--white); letter-spacing:.05em; line-height:1;
 }
 .card-trade {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--teal);
-  transition: color .3s;
+  font-size:10px; font-weight:600; letter-spacing:.12em;
+  text-transform:uppercase; margin-top:2px;
+  transition:color .3s;
 }
+
+/* ── ROW 2: DBA name — fills the void ── */
+.card-mid {
+  display:flex; align-items:center; justify-content:center;
+  padding:0 20px;
+  position:relative; z-index:1;
+}
+.card-dba {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(28px,6vw,52px);
+  color:rgba(255,255,255,.92);
+  letter-spacing:.06em;
+  text-align:center;
+  line-height:1;
+  text-shadow:0 2px 24px rgba(0,0,0,.3);
+  word-break:break-word;
+}
+.card-dba-placeholder {
+  font-family:'DM Sans',sans-serif;
+  font-size:13px; font-weight:400;
+  color:rgba(255,255,255,.2);
+  font-style:italic; text-align:center;
+}
+
+/* ── ROW 3: Contact ── */
 .card-bottom {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  position: relative;
-  z-index: 1;
+  display:flex; align-items:flex-end; justify-content:space-between;
+  padding:10px 18px 14px;
+  position:relative; z-index:1;
+  border-top:1px solid rgba(255,255,255,.07);
 }
-.card-details { flex: 1; }
-.card-phone {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--white);
-  margin-bottom: 3px;
-}
-.card-area {
-  font-size: 11px;
-  color: rgba(255,255,255,.5);
-}
+.card-contact { flex:1; }
+.card-phone { font-size:14px; font-weight:600; color:var(--white); letter-spacing:.01em; line-height:1.4; }
+.card-email { font-size:11px; color:rgba(255,255,255,.6); line-height:1.4; }
+.card-area  { font-size:10px; color:rgba(255,255,255,.38); line-height:1.4; margin-top:1px; }
 .card-qr-wrap {
-  width: 52px;
-  height: 52px;
-  background: var(--white);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  flex-shrink: 0;
+  width:50px; height:50px; background:var(--white); border-radius:6px;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden; flex-shrink:0; margin-left:12px;
 }
-.card-qr-wrap canvas,
-.card-qr-wrap img { width: 44px !important; height: 44px !important; }
-.card-powered {
-  position: absolute;
-  bottom: 10px;
-  right: 16px;
-  font-size: 9px;
-  font-weight: 600;
-  color: rgba(255,255,255,.25);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  z-index: 1;
+.card-qr-wrap canvas, .card-qr-wrap img { width:44px!important; height:44px!important; }
+.qr-placeholder {
+  width:44px; height:44px; background:#E2E8F0; border-radius:4px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:8px; color:var(--mid); text-align:center; padding:4px; line-height:1.3;
 }
+.card-powered { position:absolute; bottom:6px; right:14px; font-size:7px; font-weight:700; color:rgba(255,255,255,.18); letter-spacing:.1em; text-transform:uppercase; z-index:2; }
 
-/* ── Action buttons ── */
-.action-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-.act-btn {
-  padding: 11px;
-  border-radius: 8px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  text-align: center;
-  transition: all .15s;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-.act-primary {
-  background: var(--teal);
-  color: var(--white);
-  border: none;
-}
-.act-primary:hover { background: var(--teal-dim); }
-.act-secondary {
-  background: transparent;
-  color: var(--navy);
-  border: 1.5px solid var(--border);
-}
-.act-secondary:hover { border-color: var(--navy); }
+/* ── QR status ── */
+.qr-status { font-size:12px; color:var(--mid); text-align:center; margin:6px 0 16px; font-style:italic; min-height:18px; }
 
-.share-link-box {
-  background: var(--light);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-.share-link-text {
-  font-size: 12px;
-  color: var(--mid);
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-family: monospace;
-}
-.copy-btn {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--teal);
-  cursor: pointer;
-  border: none;
-  background: none;
-  padding: 0;
-  white-space: nowrap;
-  font-family: 'DM Sans', sans-serif;
-  flex-shrink: 0;
-}
-.copy-btn.ok { color: var(--green); }
+/* ── Actions ── */
+.action-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+.act-btn { padding:11px; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; cursor:pointer; text-align:center; transition:all .15s; display:flex; align-items:center; justify-content:center; gap:6px; }
+.act-primary { background:var(--teal); color:var(--white); border:none; }
+.act-primary:hover { background:var(--teal-dim); }
+.act-secondary { background:transparent; color:var(--navy); border:1.5px solid var(--border); }
+.act-secondary:hover { border-color:var(--navy); }
+.share-link-box { background:var(--light); border:1px solid var(--border); border-radius:8px; padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.share-link-text { font-size:11px; color:var(--mid); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family:monospace; }
+.copy-btn { font-size:12px; font-weight:600; color:var(--teal); cursor:pointer; border:none; background:none; padding:0; white-space:nowrap; font-family:'DM Sans',sans-serif; flex-shrink:0; }
+.copy-btn.ok { color:var(--green); }
 
-/* ── Color swatches data ── */
-/* stored in JS */
+/* ── Footer ── */
+.powered-footer { background:var(--navy); padding:32px 24px; text-align:center; }
+.powered-footer p { font-size:17px; font-weight:500; color:#94A3B8; line-height:1.8; max-width:520px; margin:0 auto; }
+.powered-footer strong { color:var(--teal); }
 
-@keyframes rise {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: none; }
-}
-.hero { animation: rise .35s ease-out both; }
-.main { animation: rise .4s .08s ease-out both; }
+@keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+.hero { animation:rise .35s ease-out both; }
+.main { animation:rise .4s .08s ease-out both; }
 </style>
 </head>
 <body>
@@ -390,12 +224,12 @@ body {
 <div class="hero">
   <div class="hero-eyebrow">For trade operators — 100% free</div>
   <h1>Your business card.<br><span>Your booking link.</span></h1>
-  <p>Fill in your details. Get a digital card with your own booking link built in. Share it anywhere — text, social, or print.</p>
+  <p>Fill in your details. Your business name takes center stage. Your booking link is built in.</p>
 </div>
 
 <div class="main">
 
-  <!-- Left: Form -->
+  <!-- ── LEFT: Form ── -->
   <div class="panel">
     <div class="panel-title">Your details</div>
 
@@ -404,17 +238,24 @@ body {
       <input type="text" id="f-name" placeholder="Marcus Hernandez" oninput="liveUpdate()">
     </div>
 
+    <div class="field dba-field">
+      <label>Business name <span class="note">(shows large on the card)</span></label>
+      <input type="text" id="f-dba" placeholder="Supreme Gears" oninput="liveUpdate()">
+      <div class="dba-hint">This is the name your customers will remember. Make it yours.</div>
+    </div>
+
     <div class="field">
       <label>Trade / specialty</label>
-      <select id="f-trade" onchange="liveUpdate()">
-        <option value="HVAC Technician">HVAC Technician</option>
+      <select id="f-trade" onchange="onTradeChange()">
+        <option value="HVAC Professional">HVAC Professional</option>
+        <option value="AC Specialist">AC Specialist</option>
+        <option value="Heating Specialist">Heating Specialist</option>
         <option value="Plumber">Plumber</option>
+        <option value="Plumbing & HVAC">Plumbing &amp; HVAC</option>
         <option value="Electrician">Electrician</option>
         <option value="General Contractor">General Contractor</option>
         <option value="Handyman">Handyman</option>
-        <option value="AC Specialist">AC Specialist</option>
-        <option value="Heating Specialist">Heating Specialist</option>
-        <option value="Plumbing &amp; HVAC">Plumbing &amp; HVAC</option>
+        <option value="Specialty Contractor">Specialty Contractor</option>
       </select>
     </div>
 
@@ -424,10 +265,36 @@ body {
     </div>
 
     <div class="field">
-      <label>Service area</label>
-      <input type="text" id="f-area" placeholder="Katy · Tomball · Spring" oninput="liveUpdate()">
+      <label>Email address</label>
+      <input type="email" id="f-email" placeholder="marcus@supremegears.com" oninput="liveUpdate()">
     </div>
 
+    <div class="field">
+      <label>Service area</label>
+      <input type="text" id="f-area" placeholder="Katy · Houston · The Woodlands" oninput="liveUpdate()">
+    </div>
+
+    <!-- Logo upload -->
+    <div class="field">
+      <label>Your logo <span class="note">(optional — appears top-left)</span></label>
+      <div class="logo-upload" id="logo-drop"
+           ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
+        <input type="file" id="logo-file" accept="image/*" onchange="onFileSelect(event)">
+        <img id="logo-preview" class="logo-preview" src="" alt="logo">
+        <div class="upload-icon" id="upload-icon">🖼️</div>
+        <div class="upload-text" id="upload-text">Drag & drop your logo — or click to browse</div>
+        <div class="upload-sub">PNG, JPG, SVG · Max 2MB</div>
+        <button class="logo-clear" id="logo-clear" onclick="clearLogo(event)">✕ Remove logo</button>
+      </div>
+    </div>
+
+    <!-- Trade icons -->
+    <div class="field" id="icon-selector">
+      <label>No logo? Pick your trade icon</label>
+      <div class="trade-icons" id="trade-icons"></div>
+    </div>
+
+    <!-- Color -->
     <div class="field">
       <label>Card color</label>
       <div class="color-row" id="color-row"></div>
@@ -436,30 +303,55 @@ body {
     <button class="gen-btn" onclick="generateCard()">Generate my free card →</button>
   </div>
 
-  <!-- Right: Preview -->
+  <!-- ── RIGHT: Preview ── -->
   <div class="preview-panel">
     <div class="preview-label">Live preview</div>
 
-    <!-- The card -->
     <div class="biz-card" id="biz-card">
-      <div class="card-accent"></div>
-      <div class="card-top">
-        <div class="card-op-name" id="card-name">Marcus Hernandez</div>
-        <div class="card-trade" id="card-trade">HVAC Technician</div>
+      <!-- Geometric bg -->
+      <div class="card-bg">
+        <svg width="220" height="180" viewBox="0 0 220 180" fill="none">
+          <circle cx="170" cy="20"  r="100" fill="white" fill-opacity="0.03"/>
+          <circle cx="200" cy="60"  r="60"  fill="white" fill-opacity="0.03"/>
+          <path d="M110 0 L220 0 L220 110 Z" fill="white" fill-opacity="0.025"/>
+        </svg>
       </div>
+
+      <!-- Row 1: Identity -->
+      <div class="card-top">
+        <div class="card-logo-wrap" id="card-logo-wrap">
+          <div class="card-logo-icon" id="card-logo-icon">🌡️</div>
+        </div>
+        <div class="card-id">
+          <div class="card-op-name" id="card-name">Marcus Hernandez</div>
+          <div class="card-trade" id="card-trade">HVAC Professional</div>
+        </div>
+      </div>
+
+      <!-- Row 2: DBA — center stage -->
+      <div class="card-mid">
+        <div class="card-dba" id="card-dba">
+          <span class="card-dba-placeholder" id="card-dba-ph">Enter your business name above</span>
+        </div>
+      </div>
+
+      <!-- Row 3: Contact + QR -->
       <div class="card-bottom">
-        <div class="card-details">
+        <div class="card-contact">
           <div class="card-phone" id="card-phone">(713) 555-0198</div>
-          <div class="card-area" id="card-area">Katy · Tomball · Spring</div>
+          <div class="card-email" id="card-email"></div>
+          <div class="card-area"  id="card-area">Katy · Houston · The Woodlands</div>
         </div>
         <div class="card-qr-wrap" id="qr-wrap">
-          <div id="qr-placeholder" style="width:44px;height:44px;background:#eee;border-radius:4px;"></div>
+          <div class="qr-placeholder">QR on<br>generate</div>
         </div>
       </div>
+
       <div class="card-powered">FieldPro</div>
     </div>
 
-    <!-- Actions — shown after generate -->
+    <div class="qr-status" id="qr-status">QR code generates when you click "Generate my free card"</div>
+
     <div id="actions" style="display:none">
       <div class="action-row">
         <button class="act-btn act-primary" onclick="shareCard()">Share card</button>
@@ -470,136 +362,230 @@ body {
         <button class="copy-btn" id="copy-btn-small" onclick="copyLink()">Copy</button>
       </div>
     </div>
-
   </div>
 </div>
 
-<div style="text-align:center;padding:0 24px 40px;font-size:13px;color:var(--mid);max-width:560px;margin:0 auto;">
-  Your booking link is powered by <strong style="color:var(--teal);">FieldPro</strong>. When a customer taps it, they can fill in their job details — and you get notified instantly. No app needed.
+<!-- Footer -->
+<div class="powered-footer">
+  <p>
+    Your booking link is powered by <strong>FieldPro</strong>.<br>
+    When a customer taps it, they fill in their job details and you get notified instantly.<br>
+    <strong>No app needed. No account required. Just tap and book.</strong>
+  </p>
 </div>
 
 <script>
 const JCP_BASE = 'https://drwilo.github.io/fieldpro-calculator/jcp.html';
 
+const TRADE_ICONS = {
+  "HVAC Professional":    "🌡️",
+  "AC Specialist":        "❄️",
+  "Heating Specialist":   "🔥",
+  "Plumber":              "🔧",
+  "Plumbing & HVAC":      "💧",
+  "Electrician":          "⚡",
+  "General Contractor":   "🏗️",
+  "Handyman":             "🛠️",
+  "Specialty Contractor": "⭐",
+};
+
+const ICON_OPTIONS = [
+  {icon:"🌡️",label:"HVAC"},   {icon:"❄️",label:"AC"},
+  {icon:"🔥",label:"Heating"}, {icon:"🔧",label:"Plumbing"},
+  {icon:"💧",label:"Plumb/HVAC"},{icon:"⚡",label:"Electric"},
+  {icon:"🏗️",label:"Gen. Contractor"},{icon:"🛠️",label:"Handyman"},
+  {icon:"⭐",label:"Specialty"},{icon:"🏠",label:"Home Services"},
+  {icon:"🔩",label:"Mechanical"},{icon:"📐",label:"Other"},
+];
+
 const COLORS = [
-  { hex: '#0A1628', name: 'Navy',    accent: '#0EA5E9' },
-  { hex: '#0F4C81', name: 'Blue',    accent: '#38BDF8' },
-  { hex: '#064E3B', name: 'Forest',  accent: '#34D399' },
-  { hex: '#1C1917', name: 'Charcoal',accent: '#F59E0B' },
-  { hex: '#7C2D12', name: 'Rust',    accent: '#FB923C' },
-  { hex: '#1E1B4B', name: 'Indigo',  accent: '#A78BFA' },
+  {hex:"#0A1628",name:"Navy",    accent:"#0EA5E9"},
+  {hex:"#0F4C81",name:"Blue",    accent:"#38BDF8"},
+  {hex:"#064E3B",name:"Forest",  accent:"#34D399"},
+  {hex:"#1C1917",name:"Charcoal",accent:"#F59E0B"},
+  {hex:"#7C2D12",name:"Rust",    accent:"#FB923C"},
+  {hex:"#1E1B4B",name:"Indigo",  accent:"#A78BFA"},
 ];
 
 let selectedColor = COLORS[0];
-let qrInstance = null;
+let selectedIcon  = "🌡️";
+let logoDataURL   = null;
 let cardGenerated = false;
 
 // Build color swatches
 const cr = document.getElementById('color-row');
-COLORS.forEach((c, i) => {
+COLORS.forEach((c,i) => {
   const s = document.createElement('div');
-  s.className = 'color-swatch' + (i === 0 ? ' active' : '');
-  s.style.background = c.hex;
-  s.title = c.name;
+  s.className = 'color-swatch'+(i===0?' active':'');
+  s.style.background = c.hex; s.title = c.name;
   s.onclick = () => {
-    document.querySelectorAll('.color-swatch').forEach(sw => sw.classList.remove('active'));
-    s.classList.add('active');
-    selectedColor = c;
-    applyCardColor();
-    if (cardGenerated) generateQR();
+    document.querySelectorAll('.color-swatch').forEach(x=>x.classList.remove('active'));
+    s.classList.add('active'); selectedColor = c;
+    applyCardColor(); if(cardGenerated) generateQR();
   };
   cr.appendChild(s);
 });
 
-function applyCardColor() {
-  const card = document.getElementById('biz-card');
-  card.style.background = selectedColor.hex;
-  document.getElementById('card-trade').style.color = selectedColor.accent;
+// Build icon grid
+const ig = document.getElementById('trade-icons');
+ICON_OPTIONS.forEach(opt => {
+  const b = document.createElement('button');
+  b.type='button';
+  b.className='trade-icon-btn'+(opt.icon===selectedIcon?' selected':'');
+  b.innerHTML=`<span class="ti">${opt.icon}</span><span>${opt.label}</span>`;
+  b.onclick=()=>{
+    document.querySelectorAll('.trade-icon-btn').forEach(x=>x.classList.remove('selected'));
+    b.classList.add('selected'); selectedIcon=opt.icon;
+    if(!logoDataURL) updateCardLogo();
+  };
+  ig.appendChild(b);
+});
+
+// Logo handlers
+function onDragOver(e){ e.preventDefault(); document.getElementById('logo-drop').classList.add('drag-over'); }
+function onDragLeave(){ document.getElementById('logo-drop').classList.remove('drag-over'); }
+function onDrop(e){
+  e.preventDefault(); document.getElementById('logo-drop').classList.remove('drag-over');
+  const f=e.dataTransfer.files[0]; if(f&&f.type.startsWith('image/')) loadLogo(f);
+}
+function onFileSelect(e){ const f=e.target.files[0]; if(f) loadLogo(f); }
+function loadLogo(file){
+  if(file.size>2*1024*1024){alert('Image must be under 2MB.');return;}
+  const r=new FileReader();
+  r.onload=e=>{
+    logoDataURL=e.target.result;
+    const p=document.getElementById('logo-preview');
+    p.src=logoDataURL; p.style.display='block';
+    document.getElementById('upload-icon').style.display='none';
+    document.getElementById('upload-text').style.display='none';
+    document.getElementById('logo-clear').style.display='inline-block';
+    document.getElementById('icon-selector').style.opacity='0.4';
+    document.getElementById('icon-selector').style.pointerEvents='none';
+    updateCardLogo();
+  };
+  r.readAsDataURL(file);
+}
+function clearLogo(e){
+  e.stopPropagation(); e.preventDefault();
+  logoDataURL=null;
+  document.getElementById('logo-preview').style.display='none';
+  document.getElementById('upload-icon').style.display='block';
+  document.getElementById('upload-text').style.display='block';
+  document.getElementById('logo-clear').style.display='none';
+  document.getElementById('logo-file').value='';
+  document.getElementById('icon-selector').style.opacity='1';
+  document.getElementById('icon-selector').style.pointerEvents='auto';
+  updateCardLogo();
+}
+function updateCardLogo(){
+  const w=document.getElementById('card-logo-wrap');
+  w.innerHTML=logoDataURL
+    ?`<img src="${logoDataURL}" alt="logo">`
+    :`<div class="card-logo-icon">${selectedIcon}</div>`;
+}
+function onTradeChange(){
+  const t=document.getElementById('f-trade').value;
+  const ic=TRADE_ICONS[t];
+  if(ic&&!logoDataURL){
+    selectedIcon=ic;
+    document.querySelectorAll('.trade-icon-btn').forEach(b=>{
+      b.classList.toggle('selected',b.querySelector('.ti').textContent===ic);
+    });
+    updateCardLogo();
+  }
+  liveUpdate();
 }
 
-function liveUpdate() {
+// Live update
+function liveUpdate(){
   const name  = document.getElementById('f-name').value  || 'Your Name';
+  const dba   = document.getElementById('f-dba').value.trim();
   const trade = document.getElementById('f-trade').value || 'Trade Specialist';
-  const phone = document.getElementById('f-phone').value || 'Your phone';
-  const area  = document.getElementById('f-area').value  || 'Your service area';
+  const phone = document.getElementById('f-phone').value || '';
+  const email = document.getElementById('f-email').value || '';
+  const area  = document.getElementById('f-area').value  || '';
+
   document.getElementById('card-name').textContent  = name;
   document.getElementById('card-trade').textContent = trade;
   document.getElementById('card-phone').textContent = phone;
-  document.getElementById('card-area').textContent  = area;
+
+  const emailEl = document.getElementById('card-email');
+  emailEl.textContent = email; emailEl.style.display = email?'block':'none';
+
+  document.getElementById('card-area').textContent = area;
+
+  // DBA — large center
+  const dbaEl = document.getElementById('card-dba');
+  const phEl  = document.getElementById('card-dba-ph');
+  if(dba){
+    dbaEl.textContent = dba;
+    dbaEl.style.color = 'rgba(255,255,255,0.92)';
+    if(phEl) phEl.remove();
+  } else {
+    if(!document.getElementById('card-dba-ph')){
+      const ph=document.createElement('span');
+      ph.id='card-dba-ph'; ph.className='card-dba-placeholder';
+      ph.textContent='Enter your business name above';
+      dbaEl.innerHTML=''; dbaEl.appendChild(ph);
+    }
+  }
 }
 
-function buildJCPUrl() {
-  const name  = document.getElementById('f-name').value.trim()  || 'Operator';
-  const trade = document.getElementById('f-trade').value        || 'Trade Specialist';
-  const area  = document.getElementById('f-area').value.trim()  || 'Houston Metro';
-  const params = new URLSearchParams({ name, trade, area });
-  return JCP_BASE + '?' + params.toString();
+function applyCardColor(){
+  document.getElementById('biz-card').style.background = selectedColor.hex;
+  document.getElementById('card-trade').style.color    = selectedColor.accent;
 }
 
-function generateQR() {
-  const url = buildJCPUrl();
-  const wrap = document.getElementById('qr-wrap');
-  wrap.innerHTML = '';
-  const div = document.createElement('div');
-  wrap.appendChild(div);
-  new QRCode(div, {
-    text: url,
-    width: 44,
-    height: 44,
-    colorDark: selectedColor.hex,
-    colorLight: '#ffffff',
-    correctLevel: QRCode.CorrectLevel.M
-  });
+function buildJCPUrl(){
+  const name  = document.getElementById('f-name').value.trim()||'Operator';
+  const trade = document.getElementById('f-trade').value||'Trade Specialist';
+  const area  = document.getElementById('f-area').value.trim()||'Houston Metro';
+  return JCP_BASE+'?'+new URLSearchParams({name,trade,area}).toString();
 }
 
-function generateCard() {
-  const name = document.getElementById('f-name').value.trim();
-  if (!name) {
+function generateQR(){
+  const url=buildJCPUrl();
+  const w=document.getElementById('qr-wrap');
+  w.innerHTML='';
+  const d=document.createElement('div'); w.appendChild(d);
+  new QRCode(d,{text:url,width:44,height:44,colorDark:selectedColor.hex,colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+  document.getElementById('qr-status').textContent='✅ QR code generated — scan it to test your booking link.';
+  document.getElementById('qr-status').style.color='#16A34A';
+}
+
+function generateCard(){
+  const name=document.getElementById('f-name').value.trim();
+  if(!name){
     document.getElementById('f-name').focus();
-    document.getElementById('f-name').style.borderColor = 'var(--red)';
-    setTimeout(() => document.getElementById('f-name').style.borderColor = '', 1500);
+    document.getElementById('f-name').style.borderColor='var(--red)';
+    setTimeout(()=>document.getElementById('f-name').style.borderColor='',1500);
     return;
   }
-
-  liveUpdate();
-  applyCardColor();
-  generateQR();
-
-  const url = buildJCPUrl();
-  document.getElementById('share-link-display').textContent = url;
-  document.getElementById('actions').style.display = 'block';
-  cardGenerated = true;
-
-  document.getElementById('actions').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  liveUpdate(); applyCardColor(); updateCardLogo(); generateQR();
+  const url=buildJCPUrl();
+  document.getElementById('share-link-display').textContent=url;
+  document.getElementById('actions').style.display='block';
+  cardGenerated=true;
+  document.getElementById('actions').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-function copyLink() {
-  const url = buildJCPUrl();
-  navigator.clipboard.writeText(url).then(() => {
-    const btn = document.getElementById('copy-btn-small');
-    const orig = btn.textContent;
-    btn.textContent = 'Copied!';
-    btn.classList.add('ok');
-    setTimeout(() => { btn.textContent = orig; btn.classList.remove('ok'); }, 2000);
+function copyLink(){
+  navigator.clipboard.writeText(buildJCPUrl()).then(()=>{
+    const b=document.getElementById('copy-btn-small');
+    b.textContent='Copied!'; b.classList.add('ok');
+    setTimeout(()=>{b.textContent='Copy';b.classList.remove('ok');},2000);
   });
 }
-
-function shareCard() {
-  const url = buildJCPUrl();
-  const name = document.getElementById('f-name').value.trim() || 'my';
-  const text = `Book a job with ${name} — tap the link to submit your details and I'll confirm your time.\n\n${url}`;
-  if (navigator.share) {
-    navigator.share({ title: 'Book a job', text, url }).catch(() => {});
-  } else {
-    navigator.clipboard.writeText(text).then(() => {
-      alert('Card link copied — paste it anywhere to share.');
-    });
-  }
+function shareCard(){
+  const url=buildJCPUrl();
+  const name=document.getElementById('f-name').value.trim()||'my';
+  const text=`Book a job with ${name} — tap the link to submit your details and I'll confirm your time.\n\n${url}`;
+  if(navigator.share) navigator.share({title:'Book a job',text,url}).catch(()=>{});
+  else navigator.clipboard.writeText(text).then(()=>alert('Card link copied — paste it anywhere to share.'));
 }
 
-// Init live preview
-liveUpdate();
-applyCardColor();
+// Init
+liveUpdate(); applyCardColor();
 </script>
 </body>
 </html>
